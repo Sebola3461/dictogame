@@ -15,18 +15,39 @@ export function validateText(word: string, input: string[]) {
     if (word[i] == w) results[i] = GameSquareType.Correct;
   });
 
-  let subIndex = 0;
+  const partialLetters: any = {};
+
+  word.split("").forEach((w, i) => {
+    w = w.trim();
+
+    if (partialLetters[w]) {
+      return (partialLetters[w] = {
+        s: partialLetters[w].s + 1,
+        p: partialLetters[w].p,
+      });
+    } else {
+      return (partialLetters[w] = {
+        s: 0,
+        p: 0,
+      });
+    }
+  });
+
   input.forEach((w, i) => {
     w = w.trim();
 
     let letterSize = getLetterCount(word, w);
-    console.log(letterSize);
+    console.log(partialLetters);
 
     if (results[i] == GameSquareType.Correct) return;
 
-    if (word[i] != w && word.includes(w)) {
+    if (
+      word[i] != w &&
+      word.includes(w) &&
+      partialLetters[w].p < partialLetters[w].s
+    ) {
       results[i] = GameSquareType.Partial;
-      subIndex -= 1;
+      partialLetters[w].p = partialLetters[w].p + 1;
     }
   });
 
