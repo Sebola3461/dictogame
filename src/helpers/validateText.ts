@@ -33,21 +33,21 @@ export function validateText(word: string, input: string[]) {
     }
   });
 
-  input.forEach((w, i) => {
-    w = w.trim();
+  input.forEach((letter, i) => {
+    letter = letter.trim();
 
-    let letterSize = getLetterCount(word, w);
+    let letterSize = getLetterCount(word, letter);
     console.log(partialLetters);
 
     if (results[i] == GameSquareType.Correct) return;
 
     if (
-      word[i] != w &&
-      word.includes(w) &&
-      partialLetters[w].p < partialLetters[w].s
+      word[i] != letter &&
+      word.includes(letter) &&
+      partialLetters[letter].p <= partialLetters[letter].s
     ) {
       results[i] = GameSquareType.Partial;
-      partialLetters[w].p = partialLetters[w].p + 1;
+      partialLetters[letter].p = partialLetters[letter].p + 1;
     }
   });
 
