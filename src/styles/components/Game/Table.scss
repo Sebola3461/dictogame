@@ -43,6 +43,14 @@
       background: #178f47;
       color: white;
       text-align: center;
+
+      span {
+        border-radius: 10px;
+        background: #cd7f3c;
+        color: #4c331d;
+        margin-left: 15px;
+        padding: 5px 10px;
+      }
     }
 
     button {

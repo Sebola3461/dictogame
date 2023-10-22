@@ -42,7 +42,12 @@ export function Table() {
         )}
       </div>
       <div className={`win ${game.ended && !game.failed ? "visible" : ""}`}>
-        <p>Parabéns, você acertou a palavra!</p>
+        <p>
+          Parabéns, você acertou a palavra! A palavra era
+          <span className="correct_word">
+            {game.ended && !game.failed ? `${game.word}` : "Seu curioso"}
+          </span>
+        </p>
         <button
           onClick={() => {
             resetGame();
