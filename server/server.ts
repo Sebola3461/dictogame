@@ -6,18 +6,18 @@ import path from "path";
 
 const app = express();
 
-app.use("/assets", express.static(path.resolve("./assets/")));
+app.use("/assets", express.static(path.resolve("./dist/assets/")));
 
 app.get("/", (req, res) => {
-  res.status(200).sendFile(path.resolve("./index.html"));
+  res.status(200).sendFile(path.resolve("./dist/index.html"));
 });
 
 app.get("/favicon", (req, res) => {
-  res.status(200).sendFile(path.resolve("./favicon.ico"));
+  res.status(200).sendFile(path.resolve("./public/favicon.ico"));
 });
 
 app.get("/banner", (req, res) => {
-  res.status(200).sendFile(path.resolve("./banner.png"));
+  res.status(200).sendFile(path.resolve("./public/banner.png"));
 });
 
 export const handler: Handler = app;
