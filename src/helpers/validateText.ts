@@ -33,21 +33,28 @@ export function validateText(word: string, input: string[]) {
     }
   });
 
+  const inputString = input.join();
+
   input.forEach((letter, i) => {
     letter = letter.trim();
 
-    let letterSize = getLetterCount(word, letter);
-    console.log(partialLetters);
+    let wordSize = getLetterCount(word)[letter] || 0;
+    let inputSize = getLetterCount(inputString)[letter] || 0;
+
+    // console.log(
+    //   `Word: ${word} | Input Character: ${letter} | Has: ${wordSize} | Found: ${inputSize}`
+    // );
 
     if (results[i] == GameSquareType.Correct) return;
 
     if (
       word[i] != letter &&
       word.includes(letter) &&
-      partialLetters[letter].p <= partialLetters[letter].s
+      partialLetters[letter].p <= partialLetters[letter].s &&
+      results[i] != GameSquareType.Correct
     ) {
       results[i] = GameSquareType.Partial;
-      partialLetters[letter].p = partialLetters[letter].p + 1;
+      partialLetters[letter].p = wordSize;
     }
   });
 
@@ -56,6 +63,15 @@ export function validateText(word: string, input: string[]) {
   });
 
   return results;
+}
+
+function getLetterCount(word: string) {
+  let result = {};
+  for (let str of word) {
+    result[str] = result.hasOwnProperty(str) ? result[str] + 1 : 1;
+  }
+
+  return result;
 }
 
 function getCorrectIndexes(results: GameSquareType[]) {
@@ -73,16 +89,6 @@ function getLetterIndex(string: string, character: string, cantbe: number[]) {
 
   string.split("").forEach((s, i) => {
     if (s == character && !cantbe.includes(i) && r == -1) r = i;
-  });
-
-  return r;
-}
-
-function getLetterCount(string: string, character: string) {
-  let r: number[] = [];
-
-  string.split("").forEach((s, i) => {
-    if (s == character) r.push(i);
   });
 
   return r;
