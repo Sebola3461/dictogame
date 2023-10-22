@@ -40,10 +40,20 @@ export function validateText(word: string, input: string[]) {
 
     let wordSize = getLetterCount(word)[letter] || 0;
     let inputSize = getLetterCount(inputString)[letter] || 0;
+    const correctLength =
+      results.filter((r) => r == GameSquareType.Correct).length || 0;
+    let partialLettersValidation = word.split("").map((_letter) => {
+      return {
+        letter: _letter,
+        validated: false,
+      };
+    }) as { letter: string; validated: boolean }[];
 
-    // console.log(
-    //   `Word: ${word} | Input Character: ${letter} | Has: ${wordSize} | Found: ${inputSize}`
-    // );
+    console.log(
+      `Word: ${word} | Input Character: ${letter} | Has: ${wordSize} | Found: ${inputSize} | Correct: ${correctLength} | PartialSize: ${
+        inputSize - correctLength
+      }`
+    );
 
     if (results[i] == GameSquareType.Correct) return;
 
@@ -51,10 +61,15 @@ export function validateText(word: string, input: string[]) {
       word[i] != letter &&
       word.includes(letter) &&
       partialLetters[letter].p <= partialLetters[letter].s &&
-      results[i] != GameSquareType.Correct
+      results[i] != GameSquareType.Correct &&
+      !partialLettersValidation.find((l) => l.letter == letter).validated
     ) {
       results[i] = GameSquareType.Partial;
       partialLetters[letter].p = wordSize;
+      const partialLetterIndex = partialLettersValidation.findIndex(
+        (l) => l.letter == letter
+      );
+      partialLettersValidation[partialLetterIndex].validated = true;
     }
   });
 
