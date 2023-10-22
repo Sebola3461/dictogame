@@ -41,9 +41,9 @@ export function validateText(word: string, input: string[]) {
     let wordSize = getLetterCount(word)[letter] || 0;
     let inputSize = getLetterCount(inputString)[letter] || 0;
 
-    console.log(
-      `Word: ${word} | Input Character: ${letter} | Has: ${wordSize} | Found: ${inputSize}`
-    );
+    // console.log(
+    //   `Word: ${word} | Input Character: ${letter} | Has: ${wordSize} | Found: ${inputSize}`
+    // );
 
     if (results[i] == GameSquareType.Correct) return;
 
