@@ -6,6 +6,7 @@ import { RowsContext } from "../../providers/RowsContext";
 import { Row } from "../Table/Row";
 import { Tutorial } from "../UI/Tutorial";
 import "./../../styles/components/Game/Table.scss";
+import { playButtonClickSound } from "../../helpers/soundEffects";
 
 export function Table() {
   const game = useContext(GameContext);
@@ -34,6 +35,7 @@ export function Table() {
             <button
               onClick={() => {
                 resetGame();
+                playButtonClickSound();
               }}
             >
               Me dê outra chance
@@ -51,6 +53,7 @@ export function Table() {
         <button
           onClick={() => {
             resetGame();
+            playButtonClickSound();
           }}
         >
           Me surpreenda de novo

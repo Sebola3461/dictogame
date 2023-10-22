@@ -7,6 +7,7 @@ import path from "path";
 const app = express();
 
 app.use("/assets", express.static(path.resolve("./dist/assets/")));
+app.use("/public/sound/", express.static(path.resolve("./dist/sound/")));
 
 app.get("/", (req, res) => {
   res.status(200).sendFile(path.resolve("./dist/index.html"));

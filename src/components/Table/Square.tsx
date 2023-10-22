@@ -6,6 +6,10 @@ import { validateText } from "../../helpers/validateText";
 import { GameContext, GameSquareType } from "../../providers/GameContext";
 import { RowsContext } from "../../providers/RowsContext";
 import { IGameSquareCompact } from "./Row";
+import {
+  playBackspaceSound,
+  playKeyDownSound,
+} from "../../helpers/soundEffects";
 
 export function Square({
   row,
@@ -41,6 +45,7 @@ export function Square({
     }
 
     function clearSquare() {
+      playBackspaceSound();
       table.changeSquareCharacter("");
       table.focusPreviousSquare();
     }
@@ -49,6 +54,7 @@ export function Square({
     table.changeSquareCharacter(text);
 
     table.focusNextSquare();
+    playKeyDownSound();
   }
 
   const isSelected = () => {

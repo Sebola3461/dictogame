@@ -1,6 +1,7 @@
 import React, { createContext, useState, FC, useEffect } from "react";
 import { IGameSquareCompact } from "../components/Table/Row";
 import { getWord } from "../data/words";
+import { playGameOverSound, playValidRowSound } from "../helpers/soundEffects";
 
 export enum GameSquareType {
   Clear = 0,
@@ -77,6 +78,12 @@ const GameProvider = ({ children }: any) => {
       return setKeyboard(Object.create(keyboard));
     }
   }
+
+  useEffect(() => {
+    if (failed == true) {
+      playGameOverSound();
+    }
+  }, [failed]);
 
   function resetKeyboard() {
     setKeyboard([]);

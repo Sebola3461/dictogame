@@ -1,6 +1,10 @@
 import { useContext } from "react";
 import { GameContext, GameSquareType } from "../../providers/GameContext";
 import { RowsContext } from "../../providers/RowsContext";
+import {
+  playBackspaceSound,
+  playKeyDownSound,
+} from "../../helpers/soundEffects";
 
 export function KeyboardKey({
   isEnter,
@@ -27,6 +31,7 @@ export function KeyboardKey({
 
     table.changeSquareCharacter(character);
     table.focusNextSquare();
+    playKeyDownSound();
   }
 
   function handleBackspace() {
@@ -42,6 +47,7 @@ export function KeyboardKey({
 
     table.changeSquareCharacter("");
     table.focusPreviousSquare();
+    playBackspaceSound();
   }
 
   function handleEnter() {

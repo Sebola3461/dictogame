@@ -15,6 +15,11 @@ import {
   GameKeyboardKeyStatus,
   GameSquareType,
 } from "./GameContext";
+import {
+  playInvalidRowSound,
+  playTrashRowSound,
+  playValidRowSound,
+} from "../helpers/soundEffects";
 
 export namespace Game {
   export interface Row {
@@ -251,6 +256,8 @@ const RowsProvider = ({ children }: any) => {
         row.className = "table_row";
         focusCurrentSquare();
       }, 1040);
+
+      playInvalidRowSound();
     }
 
     if (
@@ -260,6 +267,16 @@ const RowsProvider = ({ children }: any) => {
       return game.setEnded(true);
     } else {
       unlockRow(rows.filter((r) => r.unlocked).length + 1);
+    }
+
+    if (
+      rows[selectedRow].squares.filter((s) => s.state == GameSquareType.Filled)
+        .length == 5 &&
+      rowIndex != 5
+    ) {
+      playTrashRowSound();
+    } else {
+      playValidRowSound();
     }
 
     jumpRow();
