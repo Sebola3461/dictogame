@@ -58,10 +58,7 @@ export function validateText(word: string, input: string[]) {
       partialLettersValidation[input[i]] == true &&
       validationResult[i] != GameSquareType.Correct
     ) {
-      const partialLetterIndex = input.indexOf(input[i]);
-
-      if (partialLetterIndex != -1)
-        validationResult[partialLetterIndex] = GameSquareType.Partial;
+      validationResult[i] = GameSquareType.Partial;
     }
     // ==============
 
