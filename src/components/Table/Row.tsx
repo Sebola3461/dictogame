@@ -13,7 +13,7 @@ export interface IGameSquareCompact {
   state: GameSquareType;
 }
 
-export function Row({ index }: { index: number }) {
+export function Row({ index, isStatic }: { index: number; isStatic: boolean }) {
   const game = useContext(GameContext);
   const table = useContext(RowsContext);
 
@@ -31,6 +31,7 @@ export function Row({ index }: { index: number }) {
         id={s.id}
         key={s.id}
         validate={console.log}
+        isStatic={isStatic}
       />
     ));
   };
@@ -39,8 +40,8 @@ export function Row({ index }: { index: number }) {
     <div
       className={
         table.rows.filter((r) => r.unlocked).length >= index
-          ? "table_row"
-          : "table_row locked"
+          ? `table_row${isStatic ? " static" : " non_static"}`
+          : `table_row locked${isStatic ? " static" : ""}`
       }
     >
       {getSquares()}

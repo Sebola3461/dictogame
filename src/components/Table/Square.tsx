@@ -15,11 +15,13 @@ export function Square({
   row,
   index,
   id,
+  isStatic,
   validate,
 }: {
   row: number;
   index: number;
   id: string;
+  isStatic: boolean;
   validate: (...any: any) => any;
 }) {
   const [character, setCharacter] = useState("");
@@ -70,7 +72,7 @@ export function Square({
     <div
       className={`text_square ${getStatusClass(
         table.getSquare(row, index).state
-      )} ${isSelected()}`}
+      )} ${isSelected()} ${isStatic ? "static" : ""}`}
       tabIndex={index}
       onKeyDown={(ev) => {
         handleSquareText(ev);

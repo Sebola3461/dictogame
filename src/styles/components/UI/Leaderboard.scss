@@ -1,0 +1,68 @@
+@import "./../../index.scss";
+
+.leaderboard_container_overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  background: #000000ba;
+  position: absolute;
+
+  .leaderboard_container {
+    width: 90%;
+    height: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    background: $color4;
+    border-radius: 10px;
+    overflow: hidden;
+    overflow-y: auto;
+
+    .header {
+      width: 95%;
+      height: 80px;
+      min-height: 80px;
+      font-size: 2.7rem;
+      padding: 0px 2.5%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      background: #322d2a;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+    }
+
+    .statistics {
+      width: 90%;
+      padding: 2.5%;
+      margin: 20px 0px;
+      border-radius: 0.2em;
+      background: #544d48;
+
+      .statistic_container {
+        color: white;
+
+        span {
+          font-size: 20px;
+          color: #afa298;
+        }
+      }
+    }
+  }
+}

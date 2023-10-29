@@ -12,11 +12,11 @@ export function Table() {
   const game = useContext(GameContext);
   const { resetGame } = useContext(RowsContext);
 
-  function getRows() {
+  function getRows(isStatic: boolean) {
     let r: JSX.Element[] = [];
 
     for (let i = 0; i < 6; i++) {
-      r.push(<Row index={i} />);
+      r.push(<Row index={i} isStatic={isStatic} />);
     }
 
     return r;
@@ -32,6 +32,7 @@ export function Table() {
               Não foi desta vez... A palavra correta é{" "}
               <span>{getWordPT(game.word)}</span>
             </p>
+            <div className="result_table">{getRows(true).map((e) => e)}</div>
             <button
               onClick={() => {
                 resetGame();
@@ -44,12 +45,8 @@ export function Table() {
         )}
       </div>
       <div className={`win ${game.ended && !game.failed ? "visible" : ""}`}>
-        <p>
-          Parabéns, você acertou a palavra! A palavra era
-          <span className="correct_word">
-            {game.ended && !game.failed ? `${game.word}` : "Seu curioso"}
-          </span>
-        </p>
+        <p>Parabéns, você acertou a palavra!</p>
+        <div className="result_table">{getRows(true).map((e) => e)}</div>
         <button
           onClick={() => {
             resetGame();
@@ -59,7 +56,7 @@ export function Table() {
           Me surpreenda de novo
         </button>
       </div>
-      {getRows().map((e) => e)}
+      {getRows(false).map((e) => e)}
     </div>
   );
 }

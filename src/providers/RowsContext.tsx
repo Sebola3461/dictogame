@@ -247,13 +247,13 @@ const RowsProvider = ({ children }: any) => {
     });
 
     function invalidateRow() {
-      const rows = document.querySelectorAll(".table_row");
+      const rows = document.querySelectorAll(".table_row.non_static");
       const row = rows[selectedRow];
 
-      row.className = "table_row invalid";
+      row.classList.add("invalid");
 
       setTimeout(() => {
-        row.className = "table_row";
+        row.classList.remove("invalid");
         focusCurrentSquare();
       }, 1040);
 
