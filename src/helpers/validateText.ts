@@ -11,16 +11,36 @@ function createPartialLettersValidationList(word: string) {
   return validatedCharacters as { [key: string]: boolean };
 }
 
-function findLetterOccurences(letter: string) {
+function findLetterOccurences(word: string, letter: string) {
   const indices = [];
 
   for (var i = 0; i < letter.length; i++) {
-    if (letter[i] == "s") indices.push(i);
+    if (word[i] == letter) indices.push(i);
   }
+
+  return indices;
+}
+
+function removePartialsOfCorrect(
+  correctIndex: number,
+  occurrences: number[],
+  resultObject: GameSquareType[]
+) {
+  const squaresToProcess = occurrences.filter(
+    (v, index) => index != correctIndex
+  );
+
+  let result = resultObject;
+
+  for (let i = 0; i < squaresToProcess.length; i++) {
+    result[i] = GameSquareType.Filled;
+  }
+
+  return result;
 }
 
 export function validateText(word: string, input: string[]) {
-  const validationResult: GameSquareType[] = [
+  let validationResult: GameSquareType[] = [
     GameSquareType.Clear,
     GameSquareType.Clear,
     GameSquareType.Clear,
@@ -33,16 +53,16 @@ export function validateText(word: string, input: string[]) {
   let partialLettersValidation = createPartialLettersValidationList(word);
 
   for (let i = 0; i < 5; i++) {
+    const occurrences = findLetterOccurences(word, input[i]);
+
     // Validate correct
     if (word[i] == input[i]) {
       validationResult[i] = GameSquareType.Correct;
-
-      const occurrences = findLetterOccurences(input[i]);
-
-      validationResult.forEach((square, index) => {
-        if (validationResult[index] == GameSquareType.Partial)
-          validationResult[index] = GameSquareType.Filled;
-      });
+      validationResult = removePartialsOfCorrect(
+        i,
+        occurrences,
+        validationResult
+      );
     }
 
     // Validate partials
@@ -58,7 +78,7 @@ export function validateText(word: string, input: string[]) {
       partialLettersValidation[input[i]] == true &&
       validationResult[i] != GameSquareType.Correct
     ) {
-      validationResult[i] = GameSquareType.Partial;
+      validationResult[occurrences[0]] = GameSquareType.Partial;
     }
     // ==============
 
