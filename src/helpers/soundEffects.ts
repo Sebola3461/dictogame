@@ -1,35 +1,35 @@
 export function playKeyDownSound() {
-  const filename = "/public/sound/keydown.mp3";
+  const filename = "/sound/keydown.mp3";
   playAudio(filename);
 }
 
 export function playInvalidRowSound() {
-  const filename = "/public/sound/invalidrow.mp3";
+  const filename = "/sound/invalidrow.mp3";
   playAudio(filename);
 }
 
 export function playValidRowSound() {
-  const filename = "/public/sound/rowvalid.mp3";
+  const filename = "/sound/rowvalid.mp3";
   playAudio(filename);
 }
 
 export function playTrashRowSound() {
-  const filename = "/public/sound/rownone.mp3";
+  const filename = "/sound/rownone.mp3";
   playAudio(filename);
 }
 
 export function playBackspaceSound() {
-  const filename = "/public/sound/backspace.mp3";
+  const filename = "/sound/backspace.mp3";
   playAudio(filename);
 }
 
 export function playButtonClickSound() {
-  const filename = "/public/sound/buttonclick.mp3";
+  const filename = "/sound/buttonclick.mp3";
   playAudio(filename);
 }
 
 export function playGameOverSound() {
-  const filename = "/public/sound/gameover.mp3";
+  const filename = "/sound/gameover.mp3";
   playAudio(filename);
 }
 
